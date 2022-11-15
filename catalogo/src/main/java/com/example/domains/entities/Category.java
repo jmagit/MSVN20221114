@@ -7,6 +7,7 @@ import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 
 import com.example.domains.core.entities.EntityBase;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -43,7 +44,7 @@ public class Category extends EntityBase<Category> implements Serializable {
 
 	//bi-directional many-to-one association to FilmCategory
 	@OneToMany(mappedBy="category")
-	@JsonIgnore
+	@JsonBackReference
 	private List<FilmCategory> filmCategories;
 
 	public Category() {

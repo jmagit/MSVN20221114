@@ -12,6 +12,8 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.example.domains.core.repositories.contracts.RepositoryWithProjections;
 import com.example.domains.entities.Actor;
+import com.example.domains.entities.dtos.ActorDTO;
+import com.example.domains.entities.dtos.ActorShort;
 
 public interface ActorRepository extends JpaRepository<Actor, Integer>, JpaSpecificationExecutor<Actor>, RepositoryWithProjections {
 	List<Actor> findByLastUpdateGreaterThanEqualOrderByLastUpdate(Timestamp fecha);
@@ -22,4 +24,10 @@ public interface ActorRepository extends JpaRepository<Actor, Integer>, JpaSpeci
 
 	@Query(value = "SELECT * FROM actor a WHERE a.actor_id > ?1", nativeQuery = true)
 	List<Actor> findNovedadesSQL(int idInicial);
+
+	@Query("SELECT a FROM Actor a WHERE a.actorId > ?1")
+	List<ActorDTO> findActorDto(int idInicial);
+	@Query("SELECT a FROM Actor a WHERE a.actorId > ?1")
+	List<ActorShort> findActorShort(int idInicial);
+
 }

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.sql.Timestamp;
 
 
@@ -27,6 +29,7 @@ public class FilmCategory implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="category_id", insertable=false, updatable=false)
 	@NotNull
+	@JsonManagedReference
 	private Category category;
 
 	//bi-directional many-to-one association to Film

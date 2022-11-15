@@ -16,7 +16,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Sort;
 
 import com.example.domains.contracts.repositories.ActorRepository;
+import com.example.domains.contracts.services.ActorService;
 import com.example.domains.entities.Actor;
+import com.example.domains.entities.dtos.ActorDTO;
+import com.example.domains.entities.dtos.ActorShort;
 
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -56,6 +59,8 @@ public class CatalogoApplication implements CommandLineRunner {
 
 	@Autowired
 	ActorRepository dao;
+	@Autowired
+	ActorService srv;
 	
 	@Override
 	@Transactional
@@ -86,7 +91,12 @@ public class CatalogoApplication implements CommandLineRunner {
 ////		} else {
 ////			System.out.println(actor.getErrorsString());
 ////		}
-			
+//		dao.findNovedadesJPQL(200).forEach(p -> System.out.println(ActorDTO.from(p)));
+//		dao.findActorDto(200).forEach(System.out::println);
+//		dao.findActorShort(200).forEach(p -> System.out.println(p.getActorId() + " - " + p.getNombreCompleto()));
+//		dao.findAllBy(ActorDTO.class).forEach(System.out::println);
+//		dao.findAllBy(ActorShort.class).forEach(p -> System.out.println(p.getActorId() + " - " + p.getNombreCompleto()));
+//		srv.getByProjection(ActorDTO.class).forEach(System.out::println);
 		System.out.println("Instancia arrancada");
 	}
 
