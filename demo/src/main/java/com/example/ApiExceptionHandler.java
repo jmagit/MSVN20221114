@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.example.exceptions.BadRequestException;
 import com.example.exceptions.DuplicateKeyException;
 import com.example.exceptions.InvalidDataException;
@@ -24,10 +23,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindException;
 
 @RestControllerAdvice
@@ -96,10 +93,10 @@ public class ApiExceptionHandler {
 		}
 	}
 
-	@ExceptionHandler({ NotFoundException.class, EmptyResultDataAccessException.class })
+	@ExceptionHandler({ NotFoundException.class })
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public ErrorMessage notFoundRequest(Exception exception) {
-		return new ErrorMessage(404, "Not found", ServletUriComponentsBuilder.fromCurrentRequest().build().toUriString(), null);
+		return new ErrorMessage(404, exception.getMessage(), ServletUriComponentsBuilder.fromCurrentRequest().build().toUriString(), null);
 	}
 
 	@ExceptionHandler({ BadRequestException.class, DuplicateKeyException.class, HttpMessageNotReadableException.class })
@@ -129,7 +126,7 @@ public class ApiExceptionHandler {
 		return new ErrorMessage(405, exception.getMessage(), null, null);
 	}
 	@ResponseStatus(HttpStatus.FORBIDDEN)
-	@ExceptionHandler({ AccessDeniedException.class, JWTVerificationException.class, FeignException.Forbidden.class })
+	@ExceptionHandler({ FeignException.Forbidden.class })
 	public ErrorMessage accessDenied(Exception exception) {
 		return new ErrorMessage(403, "Access Denied", exception.getMessage());
 	}
