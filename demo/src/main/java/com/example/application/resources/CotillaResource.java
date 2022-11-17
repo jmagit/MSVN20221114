@@ -56,9 +56,10 @@ public class CotillaResource {
 	}
 	@GetMapping(path = "/pelis/{id}/rt")
 	public PelisDto getPelisRT(@PathVariable int id) {
-		return srvLB.getForObject("lb://CATALOGO-SERVICE/peliculas/v1/{key}?mode=short", PelisDto.class, id);
 //		return srv.getForObject("http://localhost:8010/peliculas/v1/{key}?mode=short", PelisDto.class, id);
+		return srvLB.getForObject("lb://CATALOGO-SERVICE/peliculas/v1/{key}?mode=short", PelisDto.class, id);
 	}
+	
 	@GetMapping(path = "/balancea/rt")
 //	@SecurityRequirement(name = "bearerAuth")
 	public List<String> getBalanceoRT() {
