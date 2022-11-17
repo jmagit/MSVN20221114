@@ -31,7 +31,7 @@ import com.example.exceptions.NotFoundException;
 import org.springframework.http.HttpStatus;
 
 @RestController
-@RequestMapping(path = "/v1/categorias")
+@RequestMapping(path = "/categorias/v1")
 public class CategoryResource {
 	@Autowired
 	CategoryService srv;

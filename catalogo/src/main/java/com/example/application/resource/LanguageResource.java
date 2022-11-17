@@ -33,7 +33,7 @@ import com.example.exceptions.NotFoundException;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @RestController
-@RequestMapping(path = "/v1/idiomas")
+@RequestMapping(path = "/idiomas/v1")
 public class LanguageResource {
 	@Autowired
 	private LanguageRepository dao;

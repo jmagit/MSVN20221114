@@ -59,7 +59,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @Tag(name = "peliculas-service", description = "Mantenimiento de peliculas")
-@RequestMapping(path = "/v1/peliculas")
+@RequestMapping(path = "/peliculas/v1")
 public class FilmResource {
 	@Autowired
 	private FilmRepository dao;

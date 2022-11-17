@@ -50,11 +50,11 @@ public class CatalogoResource {
 				}
 			}
 			private Href self = new Href("");
-			private Href actores = new Href("/v1/actores");
-			private Href peliculas = new Href("/v1/peliculas");
-			private Href categorias = new Href("/v1/categorias");
-			private Href idiomas = new Href("/v1/idiomas");
-			private Href novedades = new Href("/v1/novedades");
+			private Href actores = new Href("/actores/v1");
+			private Href peliculas = new Href("/peliculas/v1");
+			private Href categorias = new Href("/categorias/v1");
+			private Href idiomas = new Href("/idiomas/v1");
+			private Href novedades = new Href("/novedades/v1");
 			private Href documentacion = new Href("/open-api");
 		}
 

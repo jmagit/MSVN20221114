@@ -45,7 +45,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
 
 @RestController
-@RequestMapping(path = "/v1/actores")
+@RequestMapping(path = "/actores/v1")
 @SecurityRequirement(name = "bearerAuth")
 public class ActorResource {
 	@Autowired

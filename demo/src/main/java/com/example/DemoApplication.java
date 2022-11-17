@@ -6,7 +6,12 @@ import org.springdoc.core.customizers.OpenApiCustomiser;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
+import org.springframework.web.client.RestTemplate;
 
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -23,6 +28,8 @@ import io.swagger.v3.oas.annotations.info.License;
         externalDocs = @ExternalDocumentation(description = "Documentación del proyecto", url = "https://github.com/jmagit/curso")
 )
 @SpringBootApplication
+@EnableFeignClients("com.example.application.proxies")
+@EnableEurekaClient
 public class DemoApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
@@ -41,5 +48,18 @@ public class DemoApplication implements CommandLineRunner {
 	        openApi.getComponents().setSchemas(new TreeMap<>(schemas));
 	    };
 	}
+	
+	@Bean
+	@Primary
+	public RestTemplate restTemplate() {
+		return new RestTemplate();
+	}
+
+	@Bean
+	@LoadBalanced
+	public RestTemplate restTemplateLB() {
+		return new RestTemplate();
+	}
+
 
 }
