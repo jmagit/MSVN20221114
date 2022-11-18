@@ -15,6 +15,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,6 +44,7 @@ public class CotillaResource {
 	RestTemplate srvLB;
 
 	@GetMapping(path = "/pelis/rt")
+	@SecurityRequirement(name = "bearerAuth")
 	public List<PelisDto> getPelisRT() {
 //		ResponseEntity<List<PelisDto>> response = srv.exchange(
 //				"http://localhost:8010/peliculas/v1?mode=short", 
@@ -61,7 +63,6 @@ public class CotillaResource {
 	}
 	
 	@GetMapping(path = "/balancea/rt")
-//	@SecurityRequirement(name = "bearerAuth")
 	public List<String> getBalanceoRT() {
 		List<String> rslt = new ArrayList<>();
 		LocalDateTime inicio = LocalDateTime.now();
@@ -86,7 +87,7 @@ public class CotillaResource {
 	public List<PelisDto> getPelisProxy() {
 		return proxy.getPelis();
 	}
-//	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("isAuthenticated()")
 	@SecurityRequirement(name = "bearerAuth")
 	@GetMapping(path = "/pelis/{id}/proxy")
 	public PelisDto getPelisProxy(@PathVariable int id) {
@@ -108,7 +109,7 @@ public class CotillaResource {
 
 
 //	@PreAuthorize("hasRole('ADMIN')")
-//	@PreAuthorize("authenticated")
+	@PreAuthorize("authenticated")
 	@SecurityRequirement(name = "bearerAuth")
 	@PostMapping(path = "/pelis/{id}/like")
 	public String getPelisLike(@PathVariable int id, @Parameter(hidden = true) @RequestHeader(required = false) String authorization) {

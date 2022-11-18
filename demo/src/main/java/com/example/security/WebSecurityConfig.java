@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -40,9 +41,7 @@ public class WebSecurityConfig {
 			.csrf().disable()
 			.addFilterAfter(new JWTAuthorizationFilter(SECRET), UsernamePasswordAuthenticationFilter.class)
 			.authorizeRequests()
-			.antMatchers("/error").permitAll()
-			.antMatchers(HttpMethod.POST, "/me-gusta/**").hasRole("ADMIN")
-			.antMatchers(HttpMethod.PUT, "/me-gusta/**").hasRole("ADMIN")
+			.antMatchers("/api/cotilla/pelis/rt").hasRole("ADMIN")
 			.anyRequest().permitAll();
 		return http.build();
 	}
